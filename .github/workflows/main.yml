@@ -21,7 +21,7 @@ on:
       - name: Build docker image 
         run: docker build -t yorshdock16/datasetapple:v1 .
 
-      -name: Docker psuh to Dockerhub
+      -name: Docker push to Dockerhub
         run: docker push yorshdock16/datasetapple:v1
       
 
