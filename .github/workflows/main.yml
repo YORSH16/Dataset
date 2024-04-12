@@ -1,0 +1,31 @@
+name: CI model dockerhub
+  
+  #Trigger
+on:
+  pull_request:
+    branches:
+    - dev
+
+  #Acciones 
+  jobs:
+    build_docker_images:
+      runs_on: ubuntu-lastest 
+
+      steps:
+      - name: Check the repo 
+        uses: action/checkout@v2
+        with:
+        username: ${{ secrets.DOCKER_MAIL }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build docker image 
+        run: docker build -t yorshdock16/datasetapple:v1 .
+
+      -name: Docker psuh to Dockerhub
+        run: docker push yorshdock16/datasetapple:v1
+      
+
+
+
+
+        
