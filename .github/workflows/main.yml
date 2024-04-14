@@ -8,8 +8,8 @@ on:
 
 # Acciones 
 jobs:
-  build_docker_image:
-    runs-on: ubuntu-latest 
+  build_docker_images:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check the repo 
