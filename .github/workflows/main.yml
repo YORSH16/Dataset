@@ -32,7 +32,7 @@ jobs:
         run: docker push yorshdock16/datasetapple:v1
 
       - name: Login into the server
-        run: echo '${{ secrets.DOCKER_MAIL }}' | docker login -u '${{ secrets.DOCKER_MAIL }}' --password-stdin
+        run: echo '${{ secrets.DOCKER_PASSWORD }}' | docker login -u '${{ secrets.DOCKER_MAIL }}' --password-stdin
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
@@ -42,10 +42,10 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           scrip: |
             docker login 
-            if docker ps --all | grep -q deploy-datatset; then
+            if docker ps --all | grep deploy-datatset; then
               docker stop deploy-dataset
               docker rm deploy-dataset 
             fi 
             
             docker pull ${{ secrets.DOCKER_MAIL }}/datasetapple:v1
-            docker run -d --name 
+            docker run -d --name dataset -p 8000:8000 ${{ secrets.DOCKER_MAIL }}/deploy-dataset:v1
